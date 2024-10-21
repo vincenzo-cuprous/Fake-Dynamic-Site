@@ -1,0 +1,418 @@
+        /* Include all styles from index.html and books.html */
+                /* Include all styles from index.html */
+                :root {
+                    --primary-color: #007bff;
+                    --secondary-color: #6c757d;
+                    --background-color: #f8f9fa;
+                    --text-color: #333;
+                    --white: #ffffff;
+                }
+        
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+        
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    color: var(--text-color);
+                    background-color: var(--background-color);
+                }
+        
+                .container {
+                    width: 90%;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 0 20px;
+                }
+        
+                header {
+                    background-color: var(--white);
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    position: fixed;
+                    width: 100%;
+                    top: 0;
+                    z-index: 1000;
+                }
+        
+                nav {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 1rem 0;
+                }
+        
+                .logo {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+        
+                .logo img {
+                    width: 50px;
+                    height: auto;
+                }
+        
+                .logo-text {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: var(--primary-color);
+                }
+        
+                .nav-links {
+                    display: flex;
+                    gap: 1rem;
+                }
+        
+                .nav-links a {
+                    text-decoration: none;
+                    color: var(--text-color);
+                    font-weight: bold;
+                    transition: color 0.3s ease;
+                }
+        
+                .nav-links a:hover {
+                    color: var(--primary-color);
+                }
+        
+                .dropdown {
+                    position: relative;
+                }
+        
+                .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    background-color: var(--white);
+                    min-width: 160px;
+                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                    z-index: 1;
+                    border-radius: 4px;
+                }
+        
+                .dropdown-content a {
+                    color: var(--text-color);
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                }
+        
+                .dropdown:hover .dropdown-content {
+                    display: block;
+                }
+        
+                main {
+                    margin-top: 80px;
+                    padding: 2rem 0;
+                }
+        
+                section {
+                    background-color: var(--white);
+                    border-radius: 8px;
+                    padding: 2rem;
+                    margin-bottom: 2rem;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    opacity: 0;
+                    transform: translateY(20px);
+                    transition: opacity 0.5s, transform 0.5s;
+                }
+        
+                section.visible {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+        
+                h1, h2 {
+                    color: var(--primary-color);
+                    margin-bottom: 1rem;
+                }
+        
+                p {
+                    margin-bottom: 1rem;
+                }
+        
+                .btn {
+                    display: inline-block;
+                    background-color: var(--primary-color);
+                    color: var(--white);
+                    padding: 0.5rem 1rem;
+                    border-radius: 4px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    transition: background-color 0.3s ease;
+                }
+        
+                .btn:hover {
+                    background-color: #0056b3;
+                }
+        
+                footer {
+                    background-color: var(--secondary-color);
+                    color: var(--white);
+                    text-align: center;
+                    padding: 1rem 0;
+                    margin-top: 2rem;
+                }
+        
+                #menu-toggle {
+                    display: none;
+                }
+        
+                #dynamic-text {
+                    min-height: 1.6em;
+                }
+        
+                .cursor {
+                    display: inline-block;
+                    width: 2px;
+                    height: 1em;
+                    background-color: var(--text-color);
+                    margin-left: 2px;
+                    animation: blink 0.7s infinite;
+                }
+        
+                @keyframes blink {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0; }
+                }
+        
+                @media (max-width: 768px) {
+                    .nav-links {
+                        display: none;
+                        flex-direction: column;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        width: 100%;
+                        background-color: var(--white);
+                        padding: 1rem;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    }
+        
+                    .nav-links.active {
+                        display: flex;
+                    }
+        
+                    .dropdown-content {
+                        position: static;
+                        box-shadow: none;
+                        display: none;
+                    }
+        
+                    .dropdown.active .dropdown-content {
+                        display: block;
+                    }
+        
+                    #menu-toggle {
+                        display: block;
+                        background: none;
+                        border: none;
+                        font-size: 1.5rem;
+                        color: var(--primary-color);
+                        cursor: pointer;
+                    }
+                }
+                /* Additional styles for books page */
+                .search-bar {
+                    margin-bottom: 2rem;
+                }
+        
+                .search-bar input {
+                    width: 100%;
+                    padding: 0.5rem;
+                    font-size: 1rem;
+                    border: 1px solid var(--secondary-color);
+                    border-radius: 4px;
+                }
+        
+                .book-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                    gap: 2rem;
+                }
+        
+                .book-item {
+                    background-color: var(--white);
+                    border-radius: 8px;
+                    padding: 1rem;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    cursor: pointer;
+                    transition: transform 0.3s ease;
+                }
+        
+                .book-item:hover {
+                    transform: translateY(-5px);
+                }
+        
+                .book-item img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                    margin-bottom: 1rem;
+                }
+        
+                .book-preview {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: var(--white);
+                    padding: 2rem;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                    z-index: 1000;
+                    max-width: 80%;
+                    max-height: 80%;
+                    overflow-y: auto;
+                    display: none;
+                }
+        
+                .book-preview.active {
+                    display: block;
+                }
+        
+                .close-preview {
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                }
+        
+                .comment-section {
+                    margin-top: 2rem;
+                }
+        
+                .comment-form textarea {
+                    width: 100%;
+                    padding: 0.5rem;
+                    margin-bottom: 1rem;
+                }
+        
+                .comments-list {
+                    list-style-type: none;
+                }
+        
+                .comment-item {
+                    background-color: var(--background-color);
+                    padding: 1rem;
+                    margin-bottom: 1rem;
+                    border-radius: 4px;
+                }
+                /* Styles From books.html */
+                .search-bar {
+                    margin-bottom: 2rem;
+                }
+        
+                .search-bar input {
+                    width: 100%;
+                    padding: 0.5rem;
+                    font-size: 1rem;
+                    border: 1px solid var(--secondary-color);
+                    border-radius: 4px;
+                }
+        
+                .book-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                    gap: 2rem;
+                }
+        
+                .book-item {
+                    background-color: var(--white);
+                    border-radius: 8px;
+                    padding: 1rem;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    cursor: pointer;
+                    transition: transform 0.3s ease;
+                }
+        
+                .book-item:hover {
+                    transform: translateY(-5px);
+                }
+        
+                .book-item img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                    margin-bottom: 1rem;
+                }
+        
+                .book-preview {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: var(--white);
+                    padding: 2rem;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                    z-index: 1000;
+                    max-width: 80%;
+                    max-height: 80%;
+                    overflow-y: auto;
+                    display: none;
+                }
+        
+                .book-preview.active {
+                    display: block;
+                }
+        
+                .close-preview {
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                }
+        
+                .comment-section {
+                    margin-top: 2rem;
+                }
+        
+                .comment-form textarea {
+                    width: 100%;
+                    padding: 0.5rem;
+                    margin-bottom: 1rem;
+                }
+        
+                .comments-list {
+                    list-style-type: none;
+                }
+        
+                .comment-item {
+                    background-color: var(--background-color);
+                    padding: 1rem;
+                    margin-bottom: 1rem;
+                    border-radius: 4px;
+                }
+                /* Additional styles for islamic content page */
+                .content-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                    gap: 2rem;
+                }
+        
+                .content-item {
+                    background-color: var(--white);
+                    border-radius: 8px;
+                    padding: 1rem;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    cursor: pointer;
+                    transition: transform 0.3s ease;
+                }
+        
+                .content-item:hover {
+                    transform: translateY(-5px);
+                }
+        
+                .content-item img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                    margin-bottom: 1rem;
+                }
