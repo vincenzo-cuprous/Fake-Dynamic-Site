@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Content - Islamic Content Website</title>
+    <style>
+        /* Include all styles from index.html and books.html */
+                /* Include all styles from index.html */
+                :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            width: 50px;
+            height: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        #dynamic-text {
+            min-height: 1.6em;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: var(--text-color);
+            margin-left: 2px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                padding: 1rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                display: none;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            #menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--primary-color);
+                cursor: pointer;
+            }
+        }
+        /* Additional styles for books page */
+        .search-bar {
+            margin-bottom: 2rem;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--secondary-color);
+            border-radius: 4px;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .book-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .book-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .book-preview {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .book-preview.active {
+            display: block;
+        }
+
+        .close-preview {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .comment-section {
+            margin-top: 2rem;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .comments-list {
+            list-style-type: none;
+        }
+
+        .comment-item {
+            background-color: var(--background-color);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        /* Styles From books.html */
+        .search-bar {
+            margin-bottom: 2rem;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--secondary-color);
+            border-radius: 4px;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .book-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .book-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .book-preview {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .book-preview.active {
+            display: block;
+        }
+
+        .close-preview {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .comment-section {
+            margin-top: 2rem;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .comments-list {
+            list-style-type: none;
+        }
+
+        .comment-item {
+            background-color: var(--background-color);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        /* Additional styles for islamic content page */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .content-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .content-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .content-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp_Image_2024-10-19_at_5.56.15_PM-removebg-preview-K5W7hikBjLVTdAEZK7CpyIgN251wMA.png" alt="JIC Logo">
+                    <span class="logo-text">Islamic Content</span>
+                </div>
+                <button id="menu-toggle">☰</button>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="books.html">Books</a>
+                    <a href="islamic.html">Islamic Content</a>
+                    <div class="dropdown">
+                        <a href="#help">Help</a>
+                        <div class="dropdown-content">
+                            <a href="#contact">Contact Us</a>
+                            <a href="#whatsapp">WhatsApp</a>
+                            <a href="#facebook">Facebook</a>
+                            <a href="#instagram">Instagram</a>
+                            <a href="#twitter">Twitter</a>
+                            <a href="#telegram">Telegram</a>
+                        </div>
+                    </div>
+                    <a href="#admin">Admin</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="islamic-content-section">
+            <h1>Islamic Content</h1>
+            <div class="search-bar">
+                <input type="text" id="content-search" placeholder="Search for Islamic content...">
+            </div>
+            <div class="content-grid" id="content-grid">
+                <!-- Islamic content items will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+    <div class="book-preview" id="content-preview">
+        <span class="close-preview" id="close-preview">&times;</span>
+        <h2 id="preview-title"></h2>
+        <img id="preview-image" src="" alt="Content image">
+        <p id="preview-description"></p>
+        <a href="#" id="preview-link" class="btn" target="_blank">View Full Content</a>
+        <div class="comment-section">
+            <h3>Comments</h3>
+            <form id="comment-form" class="comment-form">
+                <textarea id="comment-text" placeholder="Leave a comment..."></textarea>
+                <button type="submit" class="btn">Submit Comment</button>
+            </form>
+            <ul id="comments-list" class="comments-list">
+                <!-- Comments will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Islamic Content Website. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Include all scripts from index.html
+
+        // Islamic content data (replace with actual content data)
+        const islamicContent = [
+            { id: 1, title: "Daily Duas", image: "/placeholder.svg?height=200&width=300", description: "A collection of daily duas for Muslims.", link: "#" },
+            { id: 2, title: "Ramadan Guide", image: "/placeholder.svg?height=200&width=300", description: "A comprehensive guide for Ramadan.", link: "#" },
+            { id: 3, title: "Islamic History", image: "/placeholder.svg?height=200&width=300", description: "An overview of Islamic history.", link: "#" },
+            // Add more content as needed
+        ];
+
+        const contentGrid = document.getElementById('content-grid');
+        const contentPreview = document.getElementById('content-preview');
+        const closePreview = document.getElementById('close-preview');
+        const previewTitle = document.getElementById('preview-title');
+        const previewImage = document.getElementById('preview-image');
+        const previewDescription = document.getElementById('preview-description');
+        const previewLink = document.getElementById('preview-link');
+        const contentSearch = document.getElementById('content-search');
+        const commentForm = document.getElementById('comment-form');
+        const commentsList = document.getElementById('comments-list');
+
+        // Display Islamic content
+        function displayContent(contentToDisplay) {
+            contentGrid.innerHTML = '';
+            contentToDisplay.forEach(content => {
+                const contentItem = document.createElement('div');
+                contentItem.classList.add('content-item');
+                contentItem.innerHTML = `
+                    <img src="${content.image}" alt="${content.title}">
+                    <h3>${content.title}</h3>
+                `;
+                contentItem.addEventListener('click', () => showContentPreview(content));
+                contentGrid.appendChild(contentItem);
+            });
+        }
+
+        // Show content preview
+        function showContentPreview(content) {
+            previewTitle.textContent = content.title;
+            previewImage.src = content.image;
+            previewImage.alt = content.title;
+            previewDescription.textContent = content.description;
+            previewLink.href = content.link;
+            contentPreview.classList.add('active');
+        }
+
+        // Close content preview
+        closePreview.addEventListener('click', () => {
+            contentPreview.classList.remove('active');
+        });
+
+        // Search functionality
+        contentSearch.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredContent = islamicContent.filter(content => 
+                content.title.toLowerCase().includes(searchTerm) || 
+                content.description.toLowerCase().includes(searchTerm)
+            );
+            displayContent(filteredContent);
+        });
+
+        // Comment functionality
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const commentText = document.getElementById('comment-text').value;
+            if (commentText.trim() !== '') {
+                const commentItem = document.createElement('li');
+                commentItem.classList.add('comment-item');
+                commentItem.textContent = commentText;
+                commentsList.appendChild(commentItem);
+                document.getElementById('comment-text').value = '';
+            }
+        });
+
+        // Initial display of Islamic content
+        displayContent(islamicContent);
+
+        // Scroll animation
+        const sections = document.querySelectorAll('section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+                        // Mobile menu toggle
+                        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && e.target !== menuToggle) {
+                navLinks.classList.remove('active');
+                dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+            }
+        });
+
+        // Resize handler to reset menu state
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.classList.remove('active');
+                dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
