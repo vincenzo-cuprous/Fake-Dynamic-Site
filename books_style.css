@@ -1,4 +1,4 @@
-                /* ... (keep the existing styles) ... */
+                    /* ... (keep the existing styles) ... */
                 /* Include all styles from index.html */
                 :root {
                     --primary-color: #007bff;
@@ -361,3 +361,6 @@
                 .admin-comment-actions button {
                     margin-right: 5px;
                 }
+                #backupBtn, #restoreBtn {
+    margin-left: 10px;
+}
